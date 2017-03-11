@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>批量添加渠道号</title>
+    <script type="text/javascript" src="jszip.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue@2.2.2/dist/vue.min.js"></script>
+    <script type="text/javascript" src="FileSaver.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="file" name="file" multiple />
+    <script type="text/javascript">
+    $("#file").on("change", function(evt) {
+        // Closure to capture the file information.
+        function handleFile(f) {
+            console.time("load zip")
+            JSZip.loadAsync(f).then(function(zip) {
+                console.timeEnd("load zip");
+                for (var i = 5; i >= 1; i--) {
+                    var ch = "channel-No." + i;
+                    zip.file("META-INF/channel", ch);
+                    console.time("generate " + ch);
+                    (function(zip, ch) {
+                        zip.generateAsync({
+                            type: "blob"
+                        }).then(function(blob) {
+                            console.timeEnd("generate " + ch);
+                            saveAs(blob, ch + ".apk");
+                        });
+                    })(zip, ch);
+                }
+            }, function(e) {
+                console.error("Error reading " + f.name + " : " + e.message);
+            });
+        }
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+        	if (f.name.) {}
+            handleFile(f);
+        }
+    });
+    </script>
+</body>
+
+</html>
