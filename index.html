@@ -7,41 +7,24 @@
     <script type="text/javascript" src="jszip.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vue@2.2.2/dist/vue.min.js"></script>
     <script type="text/javascript" src="FileSaver.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <input type="file" id="file" name="file" multiple />
-    <script type="text/javascript">
-    $("#file").on("change", function(evt) {
-        // Closure to capture the file information.
-        function handleFile(f) {
-            console.time("load zip")
-            JSZip.loadAsync(f).then(function(zip) {
-                console.timeEnd("load zip");
-                for (var i = 5; i >= 1; i--) {
-                    var ch = "channel-No." + i;
-                    zip.file("META-INF/channel", ch);
-                    console.time("generate " + ch);
-                    (function(zip, ch) {
-                        zip.generateAsync({
-                            type: "blob"
-                        }).then(function(blob) {
-                            console.timeEnd("generate " + ch);
-                            saveAs(blob, ch + ".apk");
-                        });
-                    })(zip, ch);
-                }
-            }, function(e) {
-                console.error("Error reading " + f.name + " : " + e.message);
-            });
-        }
-        var files = evt.target.files;
-        for (var i = 0, f; f = files[i]; i++) {
-        	if (f.name.) {}
-            handleFile(f);
-        }
-    });
-    </script>
+    <header>
+        <h2>渠道包生成器</h2>
+    </header>
+    <content id="app">
+        <label for="apk-file"><b>{{ apkFile ? apkFile.name : '拖放APK文件到这里！'}}<img id="apk-icon" src="android.png"></b>
+            <input :disabled="packing" v-on:change="onFileChange" type="file" id="apk-file">
+        </label>
+        <textarea v-if="apkFile" :disabled="packing" placeholder="请填写所有渠道号" v-on:input="onChannlesChange" v-on:keyup="onChannlesChange" v-on:change="onChannlesChange" v-model="channelsValue" id="channels-input"></textarea>
+        <button v-if="channelList.length > 1" :disabled="packing" class="all" v-on:click="packNow">全部下载{{channelList.length}}个渠道包<img v-if="packing" src="loading.svg"><img v-if="!packing" src="save.png"></button>
+        <div id="apk-list">
+            <span :disabled="packing" class="apk" v-on:click="packNow(ch)" v-for="ch in channelList">{{ name + '-' + ch + sufix }}<img v-if="packingChannel != ch" src="save.png"><img v-if="packingChannel == ch" src="loading.svg"></span>
+        </div>
+    </content>
+    <script type="text/javascript" src="app.js"></script>
 </body>
 
 </html>

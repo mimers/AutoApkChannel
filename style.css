@@ -1,0 +1,116 @@
+input#apk-file {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+content {
+    text-align: center;
+}
+
+label {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    background: hsl(74, 57%, 48%);
+    text-align: center;
+    align-content: center;
+    position: relative;
+    cursor: pointer;
+    margin: -15px auto 20px auto;
+    border-radius: 0px 20px 20px 20px;
+    flex: 1;
+}
+
+b {
+    width: 100%;
+    padding: 5px 15px;
+    word-break: break-all;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    background: linear-gradient(to top, hsl(0, 0%, 100%) 15% , hsla(74, 57%, 48%, 0.8));
+}
+
+h2 {
+    width: 100%;
+    margin-top: -10px;
+}
+
+body {
+    margin: 0;
+}
+
+img#apk-icon {
+    width: 64px;
+    vertical-align: middle;
+    display: block;
+    margin: 0 auto;
+    border-radius: 33px;
+}
+
+textarea#channels-input {
+    display: block;
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+    border: 1px dashed yellow;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(158, 191, 53, 0.85) inset;
+    padding: 8px;
+    flex: 1;
+}
+
+#apk-list {
+    list-style: none;
+    display: block;
+    margin: 10px 50px;
+    padding: 0;
+    text-align: center;
+}
+
+span.apk {
+    margin: 8px;
+    padding: 8px 12px;
+    background: hsl(74, 57%, 48%);
+    border-radius: 9px;
+    box-shadow: 1px 1px 4px rgba(128, 128, 128, 0.81);
+    transition: all ease .2s;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    word-break: break-all;
+}
+
+span.apk:hover {
+    box-shadow: 1px 1px 12px gray;
+    transform: translate(-1px , -1px);
+}
+
+img {
+    width: 24px;
+    vertical-align: middle;
+    margin-left: 4px;
+    border-radius: 6px;
+}
+
+.all {
+    display: block;
+    margin: 0 auto;
+    margin-top: 24px;
+    background: hsl(74, 57%, 48%);
+    border-radius: 9px;
+    box-shadow: 1px 1px 10px 0px rgba(160, 192, 52, 0.8);
+    cursor: pointer;
+    padding: 8px 20px;
+    flex: 1;
+    font-size: 115%;
+}
